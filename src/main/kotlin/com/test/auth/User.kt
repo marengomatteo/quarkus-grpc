@@ -6,8 +6,10 @@ import jakarta.persistence.Id
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Table
 import jakarta.persistence.Column
+import jakarta.persistence.TemporalType
+import jakarta.persistence.Temporal
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheEntity
-import java.sql.Date
+import java.util.Date
 
 @Table(name="user")
 @Entity
@@ -28,6 +30,7 @@ open class User {
     @Column(name = "password", nullable = false)
     var password: String? = null
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false)
     var createdDate: Date? = null
 }
