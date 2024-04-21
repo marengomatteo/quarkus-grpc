@@ -1,17 +1,30 @@
 package com.test.grpc
 
 import jakarta.enterprise.context.ApplicationScoped
+import jakarta.inject.Inject
+import jakarta.transaction.Transactional
+import com.test.grpc.ProductRepository
+import com.test.grpc.Products.ProductRequest
+import com.test.grpc.Products.CreateProductRequest
 
 @ApplicationScoped
 class ProductService {
 
-    // fun getProductById(productId: String): Product? {
-    //     return 
-    // }
+    @Inject
+    lateinit var productRepo: ProductRepository
 
-    fun getHello():String {
-        return "hello"
+    fun getProductById(productId: Long): Product? {
+        return productRepo.findById(productId)
+    }
+
+    @Transactional
+    fun createProduct(entity: CreateProductRequest) {
+        val p: Product = Product()
+        p.productName = entity.name
+        p.price = entity.priceCents.toDouble()
+        p.order = entity.orderable
+        productRepo.persist(p)
+       
     }
 
 }
-
