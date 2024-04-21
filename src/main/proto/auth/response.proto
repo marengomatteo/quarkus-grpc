@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package auth;
+
+import "auth/entities.proto";
+
+option java_package = "com.test.auth";
+
+message MeResponse {
+    UserInfo user = 1;
+}
+
+message LoginResponse {
+    UserInfo user = 1;
+    string access_token = 2;
+    string refresh_token = 3;
+}
+
+ 

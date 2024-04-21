@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package auth;
+
+import "google/protobuf/empty.proto";
+import "auth/request.proto";
+import "auth/response.proto";
+
+option java_package = "com.test.auth";
+
+service AuthService {
+    rpc Login(LoginRequest) returns (LoginResponse);
+    rpc Me (google.protobuf.Empty) returns (MeResponse);
+    rpc RegisterUser(RegisterUserRequest) returns (google.protobuf.Empty);
+    rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty);
+}
