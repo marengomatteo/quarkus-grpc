@@ -14,11 +14,8 @@ import kotlinx.coroutines.Dispatchers
 class MutinyUserService(private val userService: UserService): AuthServiceGrpc.AuthServiceImplBase() {
 
     override fun registerUser(request: Request.RegisterUserRequest, responseObserver: StreamObserver<Empty>) {
-        val coroutineScope = CoroutineScope(Dispatchers.Default)
-        coroutineScope.launch {
-              
+        CoroutineScope(Dispatchers.IO).launch {
                 userService.createUser(request)
-                
                 responseObserver.onNext(Empty.getDefaultInstance())
                 responseObserver.onCompleted()
         }
